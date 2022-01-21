@@ -14,7 +14,7 @@
     "prettier:verify": "prettier --list-different \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
     "postinstall": "husky install",
     "precommit": "lint-staged",
-    "start": "sfdx force:org:open --path /apex/TestalPage"
+    "start": "sfdx force:org:open --path /apex/ListOfCheckedInUsers"
   },
   "devDependencies": {
     "@lwc/eslint-plugin-lwc": "^1.0.1",
