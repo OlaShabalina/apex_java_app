@@ -1,0 +1,7 @@
+<apex:page controller="DropdownContactsController">
+  <apex:form>
+    <apex:selectList id="RecordId" size="1">
+        <apex:selectOptions value="{!records}"/>   
+    </apex:selectList>
+  </apex:form>
+</apex:page>

@@ -4,7 +4,7 @@ public with sharing class ContactsListWithController {
     public List<Contact> getContacts() {
         
         List<Contact> results = Database.query(
-            'SELECT FirstName, LastName, Date_of_checkin__c ' +
+            'SELECT FirstName, LastName, Id, Date_of_checkin__c ' +
             'FROM Contact ' +
             'WHERE Covid_checkin__c = true ' +
             'ORDER BY Covid_checkin__c'
