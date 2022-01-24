@@ -1,0 +1,56 @@
+<apex:page standardController="Contact" extensions="ExtenOnUserCheckin">
+
+  <!-- css styles for the page -->
+  <apex:stylesheet value="{!$Resource.CustomCSS}" />
+
+  <!-- header -->
+  <apex:image styleClass="covid_app_logo" value="{!$Resource.CovidAppLogo}" />
+  <h1>Covid19 registration app</h1>
+    
+  <!-- form for registering a new user -->
+  <apex:form>
+    <apex:pageBlock title="Please enter your details below:">
+      <apex:pageBlockSection columns="1">
+        <apex:inputField value="{! Contact.FirstName }"/>
+        <apex:inputField value="{! Contact.LAstName }"/>
+        <apex:inputField value="{! Contact.Covid_checkin__c }"/>
+        <apex:inputField value="{! Contact.Date_of_checkin__c }"/>
+      </apex:pageBlockSection>
+      <apex:pageBlockButtons >  
+          <apex:commandButton 
+            value="Save" 
+            action="{!showSuccessMessage}" 
+            status="go" 
+            disabled="false" 
+            rerender="successMessage"
+          />
+      </apex:pageBlockButtons>      
+    </apex:pageBlock>
+
+    <!-- display success message once the form is submitted -->
+    <apex:outputPanel id="successMessage">
+      <apex:outputPanel 
+        styleClass="successMessage" 
+        layout="block" 
+        rendered="{!displaySuccessMessage}" 
+        style="color:green; font-style:italic"
+      >
+        Thank you, you have successfully submitted the form. Click Redirect to see the list of registeres users.
+        <apex:commandButton 
+          value="Redirect" 
+          action="{!Redirect}" 
+          rerender="successMessage"
+        />
+      </apex:outputPanel>
+    </apex:outputPanel>
+  </apex:form>
+
+  <!-- link to the check-in VF page -->
+  <p>To see the list of all checked-in users please use the following link:</p>
+  <apex:outputLink 
+    value="https://resourceful-hawk-2mn035-dev-ed--c.visualforce.com/apex/ListOfCheckedInUsers" 
+    id="theLink"
+  >
+    User list
+  </apex:outputLink>
+</apex:page>

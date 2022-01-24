@@ -14,12 +14,14 @@
         <apex:column value="{! ct.FirstName }"/>
         <apex:column value="{! ct.LastName }"/>
         <apex:column value="{! ct.Date_of_checkin__c }"/>
-        <apex:column><apex:outputLink value="https://resourceful-hawk-2mn035-dev-ed.lightning.force.com/lightning/r/Contact/{! ct.Id}/view">details</apex:outputLink></apex:column>
+        <apex:column><apex:outputLink value="https://resourceful-hawk-2mn035-dev-ed.lightning.force.com/lightning/r/Contact/{! ct.Id}/view">contact card</apex:outputLink></apex:column>
       </apex:pageBlockTable>
     </apex:pageBlock>
   </apex:form>
 
   <!-- link to the check-in VF page -->
   <p>You can check-in below using the following link:</p>
-  <apex:outputLink value="https://resourceful-hawk-2mn035-dev-ed--c.visualforce.com/apex/UserCheckinPage" id="theLink">Check-in Form</apex:outputLink>  
+  <apex:outputLink value="https://resourceful-hawk-2mn035-dev-ed--c.visualforce.com/apex/UserCheckinPage" id="theLink">
+    Check-in Form
+  </apex:outputLink>  
 </apex:page>
