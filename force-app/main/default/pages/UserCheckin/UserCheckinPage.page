@@ -1,64 +1,38 @@
-<apex:page standardController="Contact" extensions="ExtenOnUserCheckin, InputFieldErrorExtension">
+<apex:page standardController="Contact" extensions="ExtenOnUserCheckin" docType="html-5.0">
 
-  <!-- css styles for the page -->
-  <apex:stylesheet value="{!$Resource.CustomCSS}" />
+<!-- css styles for the page  -->
+<apex:stylesheet value="{!$Resource.CustomCSS}" /> 
 
-  <!-- header -->
-  <apex:image styleClass="covid_app_logo" value="{!$Resource.CovidAppLogo}" />
-  <h1>Covid19 registration app</h1>
-    
-  <!-- form for registering a new user -->
-  <apex:form>
+<!-- header -->
+<apex:image styleClass="covid_app_logo" value="{!$Resource.CovidAppLogo}" />
+<h1>Covid19 registration app</h1>
+
+     
+<!-- form for registering a new user -->
+<apex:form >
     <apex:pageBlock title="Please enter your details below:">
-      <apex:pageBlockSection columns="1">
-        <apex:inputField value="{! Contact.FirstName }"/> 
-        
-        <!-- adding an error message to each field -->
-        <div style="color:red; font-style:italic">
-          {!errorMessage}
-        </div>
+       
+      <!-- success message on submission -->
+        <P style="color:green;font-size:10px;"> {! SuccessMessage} </P>
+         
+        <apex:pageBlockSection columns="1">
+            
+            First Name: 
+            <P style="color:red;font-size:10px;"> {!FirstnameError} </P>
+            <apex:inputText value="{!FirstName}"/> 
+            
+            Last Name: 
+            <P style="color:red;font-size:10px;font-style:italic;"> {!LastNameError} </P>
+            <apex:inputText value="{!LastName}"/>
+            
+            Check-in Date:
+            <P style="color:red;font-size:10px;"> {!DateError} </P>
+            <apex:input type="date" value="{!CheckinDate}" />
 
-        <apex:inputField value="{! Contact.LastName }"/>
-
-        <div style="color:red; font-style:italic">
-          {!errorMessage}
-        </div>
-
-        <apex:inputField value="{! Contact.Date_of_checkin__c }"/>
-
-        <div style="color:red; font-style:italic">
-          {!errorMessage}
-        </div>
-
-      </apex:pageBlockSection>
-      <apex:pageBlockButtons >  
-          <apex:commandButton 
-            value="Save" 
-            action="{!showSuccessMessage}" 
-            status="go" 
-            disabled="false" 
-            rerender="successMessage"
-          />
-      </apex:pageBlockButtons>      
+            <apex:commandButton value="save" action="{!saveForm}"/>
+        </apex:pageBlockSection>
     </apex:pageBlock>
-
-    <!-- display success message once the form is submitted -->
-    <apex:outputPanel id="successMessage">
-      <apex:outputPanel 
-        styleClass="successMessage" 
-        layout="block" 
-        rendered="{!displaySuccessMessage}" 
-        style="color:green; font-style:italic"
-      >
-        Thank you, you have successfully submitted the form. Click Redirect to see the list of registeres users.
-        <apex:commandButton 
-          value="Redirect" 
-          action="{!Redirect}" 
-          rerender="successMessage"
-        />
-      </apex:outputPanel>
-    </apex:outputPanel>
-  </apex:form>
+</apex:form>
 
   <!-- link to the check-in VF page -->
   <p>To see the list of all checked-in users please use the following link:</p>
