@@ -1,4 +1,4 @@
-<apex:page standardController="Contact" extensions="ExtenOnUserCheckin">
+<apex:page standardController="Contact" extensions="ExtenOnUserCheckin, InputFieldErrorExtension">
 
   <!-- css styles for the page -->
   <apex:stylesheet value="{!$Resource.CustomCSS}" />
@@ -11,10 +11,25 @@
   <apex:form>
     <apex:pageBlock title="Please enter your details below:">
       <apex:pageBlockSection columns="1">
-        <apex:inputField value="{! Contact.FirstName }"/>
-        <apex:inputField value="{! Contact.LAstName }"/>
-        <apex:inputField value="{! Contact.Covid_checkin__c }"/>
+        <apex:inputField value="{! Contact.FirstName }"/> 
+        
+        <!-- adding an error message to each field -->
+        <div style="color:red; font-style:italic">
+          {!errorMessage}
+        </div>
+
+        <apex:inputField value="{! Contact.LastName }"/>
+
+        <div style="color:red; font-style:italic">
+          {!errorMessage}
+        </div>
+
         <apex:inputField value="{! Contact.Date_of_checkin__c }"/>
+
+        <div style="color:red; font-style:italic">
+          {!errorMessage}
+        </div>
+
       </apex:pageBlockSection>
       <apex:pageBlockButtons >  
           <apex:commandButton 

@@ -5,15 +5,21 @@ public with sharing class ExtenOnUserCheckin {
         this.sc = sc;
     }
     
-    public Boolean displaySuccessMessage {get; set;}     
+    // Varible to display success message
+    public Boolean displaySuccessMessage {get; set;} 
     
     public void closeSuccessMessage() {  
         displaySuccessMessage = false;
         
     }     
     public void showSuccessMessage() {
-        sc.Save();        
-        displaySuccessMessage = true;
+        try {
+            sc.Save();        
+            displaySuccessMessage = true;
+        } catch (Exception error) {
+            // display error message
+            ApexPages.addmessage(new ApexPages.message(ApexPages.severity.WARNING,'Please enter Account phone'));
+        }
     }
     
    public PageReference Redirect() {

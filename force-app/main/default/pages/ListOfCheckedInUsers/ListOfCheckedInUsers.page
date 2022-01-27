@@ -14,7 +14,10 @@
         <apex:column value="{! ct.FirstName }"/>
         <apex:column value="{! ct.LastName }"/>
         <apex:column value="{! ct.Date_of_checkin__c }"/>
-        <apex:column><apex:outputLink value="https://resourceful-hawk-2mn035-dev-ed.lightning.force.com/lightning/r/Contact/{! ct.Id}/view">contact card</apex:outputLink></apex:column>
+        <apex:column><apex:outputLink 
+          value="https://resourceful-hawk-2mn035-dev-ed.lightning.force.com/lightning/r/Contact/{! ct.Id}/view">
+            contact card
+        </apex:outputLink></apex:column>
       </apex:pageBlockTable>
     </apex:pageBlock>
   </apex:form>
