@@ -1,10 +1,10 @@
-<apex:page standardController="Contact" extensions="ExtenOnUserCheckin" docType="html-5.0">
+<apex:page controller="UserCheckinController" docType="html-5.0">
 
 <!-- css styles for the page  -->
-<apex:stylesheet value="{!$Resource.CustomCSS}" /> 
+<apex:stylesheet value="{! $Resource.CustomCSS }" /> 
 
 <!-- header -->
-<apex:image styleClass="covid_app_logo" value="{!$Resource.CovidAppLogo}" />
+<apex:image styleClass="covid_app_logo" value="{! $Resource.CovidAppLogo }" />
 <h1>Covid19 registration app</h1>
 
      
@@ -13,23 +13,23 @@
     <apex:pageBlock title="Please enter your details below:">
        
       <!-- success message on submission -->
-        <P style="color:green;font-size:10px;"> {! SuccessMessage} </P>
+        <P style="color:green;font-size:15px;font-style:italic;"> {! successMessage } </P>
          
         <apex:pageBlockSection columns="1">
             
-            First Name: 
-            <P style="color:red;font-size:10px;"> {!FirstnameError} </P>
-            <apex:inputText value="{!FirstName}"/> 
-            
-            Last Name: 
-            <P style="color:red;font-size:10px;font-style:italic;"> {!LastNameError} </P>
-            <apex:inputText value="{!LastName}"/>
-            
-            Check-in Date:
-            <P style="color:red;font-size:10px;"> {!DateError} </P>
-            <apex:input type="date" value="{!CheckinDate}" />
+          First Name: 
+          <P style="color:red;font-size:10px;font-style:italic;"> {! firstnameError } </P>
+          <apex:inputText value="{! firstName }"/> 
+          
+          Last Name: 
+          <P style="color:red;font-size:10px;font-style:italic;"> {! lastNameError } </P>
+          <apex:inputText value="{! lastName }"/>
+          
+          Check-in Date:
+          <P style="color:red;font-size:10px;font-style:italic;"> {! dateError } </P>
+          <apex:input type="date" value="{! checkinDate }" />
 
-            <apex:commandButton value="save" action="{!saveForm}"/>
+          <apex:commandButton value="save" action="{! saveForm }"/>
         </apex:pageBlockSection>
     </apex:pageBlock>
 </apex:form>

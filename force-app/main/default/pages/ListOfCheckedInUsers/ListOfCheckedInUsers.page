@@ -1,4 +1,4 @@
-<apex:page controller="ContactsListWithController">
+<apex:page controller="ContactsListWithController" docType="html-5.0">
   
   <!-- css styles for the page -->
   <apex:stylesheet value="{!$Resource.CustomCSS}" />

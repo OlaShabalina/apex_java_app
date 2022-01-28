@@ -1,19 +1,15 @@
-public with sharing class ExtenOnUserCheckin {
+public with sharing class UserCheckinController {
     
     // declaring values from the input
-    public String FirstName{get;set;}
-    public String LastName{get;set;}
-    public Date CheckinDate{get;set;}
+    public String firstName{get;set;}
+    public String lastName{get;set;}
+    public Date checkinDate{get;set;}
 
     // declaring error and success messages
-    public String FirstnameError{get;set;}
-    public String LastNameError{get;set;}
-    public String DateError{get;set;}
-    public String SuccessMessage{get;set;}
-
-    Public ExtenOnUserCheckin(ApexPages.StandardController controller) {
-            //id = System.currentPageReference().getParameters().get('id');
-    }
+    public String firstnameError{get;set;}
+    public String lastNameError{get;set;}
+    public String dateError{get;set;}
+    public String successMessage{get;set;}
 
     public void saveForm() {
 
@@ -24,46 +20,47 @@ public with sharing class ExtenOnUserCheckin {
         Pattern mypattern = Pattern.compile(reg);
 
         // Match With First Name
-        Matcher FirstMatcher = mypattern.matcher(FirstName);
-        boolean isFirstNameValid = FirstMatcher.matches();
+        Matcher firstNameMatcher = mypattern.matcher(firstName);
+        boolean isFirstNameValid = firstNameMatcher.matches();
 
         // Match With Last Name
-        Matcher LastMyMatcher = mypattern.matcher(LastName);
-        boolean isLastNameValid = LastMyMatcher.matches();
+        Matcher lastNameMatcher = mypattern.matcher(lastName);
+        boolean isLastNameValid = lastNameMatcher.matches();
         
         // Checkin Date difference - if less than 0 then it will be past date
         Date startDate = Date.today();
-        Integer noOfDays = startDate.daysBetween( CheckinDate );
+        Integer noOfDays = startDate.daysBetween( checkinDate );
         
         // validation for each field with displaying an error message
         if ( isFirstNameValid == false ) {
             isInputValid = false;
-            FirstnameError = 'Please Enter Valid First Name';
+            firstnameError = 'Please Enter Valid First Name';
         } else {
-            FirstnameError = '';
+            firstnameError = '';
         }
 
         if ( isLastNameValid == false ) {
             isInputValid = false;
-            LastNameError = 'Please Enter Valid Last Name';
+            lastNameError = 'Please Enter Valid Last Name';
         } else {
-            LastNameError = '';
+            lastNameError = '';
         } 
         
         if ( noOfDays < 0 ) {
             isInputValid = false;
-            DateError = 'Please Enter today or Up Comming Date';
+            dateError = 'Please Enter today or Up Comming Date';
         } else {
-            DateError = '';
+            dateError = '';
         } 
         
+        // if everything is valid we submit the form
         if ( isInputValid == true) {
 
             // if everything is correct we create a new contact with checkin date
             Contact newContact = new Contact();
-            newContact.FirstName = FirstName;
-            newContact.LastName = LastName;
-            newContact.Date_of_checkin__c = CheckinDate;
+            newContact.FirstName = firstName;
+            newContact.LastName = lastName;
+            newContact.Date_of_checkin__c = checkinDate;
             
             insert newContact;
 
