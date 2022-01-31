@@ -10,12 +10,11 @@
         <target>lightning__HomePage</target>
         <target>lightningCommunity__Page</target>
     </targets>
-    <!-- <targetConfigs>
-    which objects support the component
+    <targetConfigs>
         <targetConfig targets="lightning__RecordPage">
             <objects>
                 <object>Product__c</object>
             </objects>
         </targetConfig>
-    </targetConfigs> -->
+    </targetConfigs>
 </LightningComponentBundle>
