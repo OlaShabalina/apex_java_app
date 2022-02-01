@@ -1,0 +1,13 @@
+<template>
+  <lightning-card>
+    <!-- if there is data we will display it in the lightning database -->
+      <template if:true={contacts.data}>
+          <lightning-datatable
+              key-field="Id"
+              data={contacts.data}
+              columns={columns}
+          >
+         </lightning-datatable>
+      </template>
+  </lightning-card>
+</template>
