@@ -1,4 +1,5 @@
 public with sharing class UserCheckinController {
+     @AuraEnabled(cacheable=true)
     
     // declaring values from the input
     public String firstName{get;set;}
