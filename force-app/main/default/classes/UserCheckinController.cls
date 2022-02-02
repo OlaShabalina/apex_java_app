@@ -1,18 +1,31 @@
 public with sharing class UserCheckinController {
-     @AuraEnabled(cacheable=true)
     
-    // declaring values from the input
-    public String firstName{get;set;}
-    public String lastName{get;set;}
-    public Date checkinDate{get;set;}
+    // wrapper class with @AuraEnabled and {get;set;} properties 
+    public class CheckedInUserVariablesWrapper {
 
-    // declaring error and success messages
-    public String firstnameError{get;set;}
-    public String lastNameError{get;set;}
-    public String dateError{get;set;}
-    public String successMessage{get;set;}
+        // declaring values from the input
+        @AuraEnabled
+        public String firstName{get;set;}
+        @AuraEnabled
+        public String lastName{get;set;}
+        @AuraEnabled
+        public Date checkinDate{get;set;}
 
-    public void saveForm() {
+        // declaring error and success messages
+        @AuraEnabled
+        public String firstnameError{get;set;}
+        @AuraEnabled
+        public String lastNameError{get;set;}
+        @AuraEnabled
+        public String dateError{get;set;}
+        @AuraEnabled
+        public String successMessage{get;set;}
+    }
+
+    @AuraEnabled(cacheable=true)
+    public static void saveForm() {
+
+        CheckedInUserVariablesWrapper usersWrapper = new CheckedInUserVariablesWrapper();
 
         boolean isInputValid = true;
 
@@ -21,37 +34,37 @@ public with sharing class UserCheckinController {
         Pattern mypattern = Pattern.compile(reg);
 
         // Match With First Name
-        Matcher firstNameMatcher = mypattern.matcher(firstName);
+        Matcher firstNameMatcher = mypattern.matcher(usersWrapper.firstName);
         boolean isFirstNameValid = firstNameMatcher.matches();
 
         // Match With Last Name
-        Matcher lastNameMatcher = mypattern.matcher(lastName);
+        Matcher lastNameMatcher = mypattern.matcher(usersWrapper.lastName);
         boolean isLastNameValid = lastNameMatcher.matches();
         
         // Checkin Date difference - if less than 0 then it will be past date
         Date startDate = Date.today();
-        Integer noOfDays = startDate.daysBetween( checkinDate );
+        Integer noOfDays = startDate.daysBetween( usersWrapper.checkinDate );
         
         // validation for each field with displaying an error message
         if ( isFirstNameValid == false ) {
             isInputValid = false;
-            firstnameError = 'Please Enter Valid First Name';
+            usersWrapper.firstnameError = 'Please Enter Valid First Name';
         } else {
-            firstnameError = '';
+            usersWrapper.firstnameError = '';
         }
 
         if ( isLastNameValid == false ) {
             isInputValid = false;
-            lastNameError = 'Please Enter Valid Last Name';
+            usersWrapper.lastNameError = 'Please Enter Valid Last Name';
         } else {
-            lastNameError = '';
+            usersWrapper.lastNameError = '';
         } 
         
         if ( noOfDays < 0 ) {
             isInputValid = false;
-            dateError = 'Please Enter today or Up Comming Date';
+            usersWrapper.dateError = 'Please Enter today or Up Comming Date';
         } else {
-            dateError = '';
+            usersWrapper.dateError = '';
         } 
         
         // if everything is valid we submit the form
@@ -59,13 +72,13 @@ public with sharing class UserCheckinController {
 
             // if everything is correct we create a new contact with checkin date
             Contact newContact = new Contact();
-            newContact.FirstName = firstName;
-            newContact.LastName = lastName;
-            newContact.Date_of_checkin__c = checkinDate;
+            newContact.FirstName = usersWrapper.firstName;
+            newContact.LastName = usersWrapper.lastName;
+            newContact.Date_of_checkin__c = usersWrapper.checkinDate;
             
             insert newContact;
 
-            SuccessMessage = 'You have successfully checked in';
+            usersWrapper.SuccessMessage = 'You have successfully checked in';
         }
        
     }

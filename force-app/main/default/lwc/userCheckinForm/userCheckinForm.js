@@ -15,13 +15,17 @@ export default class UserCheckinForm extends LightningElement {
 
     handleSuccess(event) {
 
+        const updateUsersListEvent = new CustomEvent('formsubmit');
+        this.dispatchEvent(updateUsersListEvent);
+
         // show success message on form submission
         const toastEvent = new ShowToastEvent({
             title: "User has successfully checked in",
-            message: event.detail.FirstName + " " + event.detail.LastName,
+            message: "You can find your name in the list of checked-in users",
             variant: "success"
         });
         this.dispatchEvent(toastEvent);
+
     }
     
 }
