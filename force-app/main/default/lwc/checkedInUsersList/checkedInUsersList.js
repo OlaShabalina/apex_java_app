@@ -20,16 +20,9 @@ export default class CheckedInUsersList extends LightningElement {
   @wire(getContacts)
   contacts;
   
-  // refreshing the data in the table
-  handleListRefresh (){
-    refreshApex(this.contacts);
-  }
-
-  handleRowAction(event) {
-    
-// event for showing the contact details
-// or delete the record, yet to decide
-    
-  }
+  // // refreshing the data in the table
+  // handleListRefresh (){
+  //   refreshApex(this.contacts);
+  // }
 
 }

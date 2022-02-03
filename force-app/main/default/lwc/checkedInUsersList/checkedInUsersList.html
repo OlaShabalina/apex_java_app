@@ -1,20 +1,19 @@
 <template>
   <lightning-card>
     <h1 class="slds-text-align_center slds-text-heading_medium slds-p-bottom_medium">
-      Checked-in users
+      Checked-in users List
     </h1>
 
     <!-- if there is data we will display it in the lightning database -->
-    <template if:true={contacts.data} onlistrefresh = {handleListRefresh}>
+    <template if:true={contacts.data}>
         <lightning-datatable
             key-field="Id"
             data={contacts.data}
             columns={columns}
             hide-checkbox-column="true"
             show-row-number-column="true"
-            onrowaction={handleRowAction}
         >
-        </lightning-datatable>
+        </lightning-datatable> 
     </template>
 
   </lightning-card>

@@ -1,24 +1,16 @@
 <template>
   <lightning-card>
-
-    <h1 class="slds-text-align_center slds-text-heading_medium slds-p-bottom_medium">
-      Please pick the date to see if there are any checked-in users
-    </h1>
-
-    <lightning-input 
-      type="date" 
-      variant="label-hidden" 
-      style="bottom: 100%; width: 300px" 
-      class="slds-p-around_small">
-    </lightning-input>
-    <lightning-button 
-      variant="brand" 
-      label="Submit" 
-      title="Primary action" 
-      onclick={handleClick} 
-      class="slds-m-left_x-small"
-      style="padding-left: 110px">
-    </lightning-button>
-
+    
+    <!-- if there is data we will display it in the lightning database -->
+    <template if:true={contacts.data}>
+      <lightning-datatable
+          key-field="Id"
+          data={contacts.data}
+          columns={columns}
+          hide-checkbox-column="true"
+          show-row-number-column="true"
+      >
+      </lightning-datatable> 
+    </template>
   </lightning-card>  
 </template>

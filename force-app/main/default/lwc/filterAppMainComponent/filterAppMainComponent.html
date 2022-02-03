@@ -1,0 +1,19 @@
+<template>
+  <div class="wrapper">
+  <section class="content">
+      <div class="columns">
+        <aside class="sidebar">
+            <c-date-picker 
+              style="bottom: 100%; width: 300px"
+              ondateselected={handleDateSelected}>
+            </c-date-picker>
+        </aside>
+        <main class="main" >
+            <c-checked-in-users-list-arranged-by-date>
+            </c-checked-in-users-list-arranged-by-date>
+        </main>
+        <div>{selectedCheckinDate}</div>
+      </div>
+  </section>
+  </div>
+</template>

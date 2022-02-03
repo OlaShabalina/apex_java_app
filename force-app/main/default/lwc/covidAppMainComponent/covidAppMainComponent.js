@@ -1,12 +1,10 @@
 import { LightningElement } from 'lwc';
-import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
+
 
 export default class CovidAppMainComponent extends LightningElement {
+  childAction;
 
-  handleFormSubmit(event) {
-
-    // custom event on the form submittion should 
-    const listRefreshEvent = new CustomEvent('listrefresh');
-    this.dispatchEvent(listRefreshEvent);
+  handleFormSubmit() {
+    window.location.reload();
   }
 }
