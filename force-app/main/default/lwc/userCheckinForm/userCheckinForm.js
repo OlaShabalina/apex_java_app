@@ -14,7 +14,7 @@ export default class UserCheckinForm extends LightningElement {
     // on success , we will send a toast message and pass a custom event to the parent
     handleSuccess(event) {
 
-        const updateUsersListEvent = new CustomEvent('formsubmit');
+        const updateUsersListEvent = new CustomEvent('somethingelse');
         this.dispatchEvent(updateUsersListEvent);
 
         // show success message on form submission
