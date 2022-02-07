@@ -5,11 +5,13 @@
       Check-in Form
     </h1>
 
-    <lightning-record-form
-        object-api-name={objectApiName}
-        fields={fields}
-        onsuccess={handleSuccess}
-    >
-    </lightning-record-form>
+    <lightning-input type="text" label="First Name" value={firstName} onchange={setFirstName}></lightning-input>
+    
+    <lightning-input type="text" label="Last Name" value={lastName} onchange={setLastName}></lightning-input>
+
+    <lightning-input type="date" label="CheckinDate" value={checkinDate} onchange={setCheckinDate}></lightning-input>
+  
+    <lightning-button label="Check-in" onclick={handleSubmit}></lightning-button>
+
   </lightning-card>
 </template>

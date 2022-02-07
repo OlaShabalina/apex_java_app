@@ -1,31 +1,33 @@
 public with sharing class UserCheckinController {
     
     // wrapper class with @AuraEnabled and {get;set;} properties 
-    public class CheckedInUserVariablesWrapper {
+    private class CheckedInUserVariablesWrapper {
 
         // declaring values from the input
-        @AuraEnabled
-        public String firstName{get;set;}
-        @AuraEnabled
-        public String lastName{get;set;}
-        @AuraEnabled
-        public Date checkinDate{get;set;}
+        private String firstName;
+        private String lastName;
+        private Date checkinDate;
+
+    }
+
+    
+    private class errorSuccessMessagesWrapper {
 
         // declaring error and success messages
-        @AuraEnabled
-        public String firstnameError{get;set;}
-        @AuraEnabled
-        public String lastNameError{get;set;}
-        @AuraEnabled
-        public String dateError{get;set;}
-        @AuraEnabled
-        public String successMessage{get;set;}
+        private String firstnameError;
+        private String lastNameError;
+        private String dateError;
+        private String successMessage;
     }
 
     @AuraEnabled(cacheable=true)
-    public static void saveForm() {
+    public static String saveForm(String firstName, String lastName, Date checkinDate) {
 
         CheckedInUserVariablesWrapper usersWrapper = new CheckedInUserVariablesWrapper();
+        errorSuccessMessagesWrapper errSuccsessWrapper = new errorSuccessMessagesWrapper();
+
+        // default value for the wrapper to show success message if there are no errors
+        errSuccsessWrapper.SuccessMessage = 'You have successfully checked in';
 
         boolean isInputValid = true;
 
@@ -48,23 +50,26 @@ public with sharing class UserCheckinController {
         // validation for each field with displaying an error message
         if ( isFirstNameValid == false ) {
             isInputValid = false;
-            usersWrapper.firstnameError = 'Please Enter Valid First Name';
+            errSuccsessWrapper.firstnameError = 'Please Enter Valid First Name';
+            errSuccsessWrapper.SuccessMessage = '';
         } else {
-            usersWrapper.firstnameError = '';
+            errSuccsessWrapper.firstnameError = '';
         }
 
         if ( isLastNameValid == false ) {
             isInputValid = false;
-            usersWrapper.lastNameError = 'Please Enter Valid Last Name';
+            errSuccsessWrapper.lastNameError = 'Please Enter Valid Last Name';
+            errSuccsessWrapper.SuccessMessage = '';
         } else {
-            usersWrapper.lastNameError = '';
+            errSuccsessWrapper.lastNameError = '';
         } 
         
         if ( noOfDays < 0 ) {
             isInputValid = false;
-            usersWrapper.dateError = 'Please Enter today or Up Comming Date';
+            errSuccsessWrapper.dateError = 'Please Enter today or Up Comming Date';
+            errSuccsessWrapper.SuccessMessage = '';
         } else {
-            usersWrapper.dateError = '';
+            errSuccsessWrapper.dateError = '';
         } 
         
         // if everything is valid we submit the form
@@ -77,9 +82,9 @@ public with sharing class UserCheckinController {
             newContact.Date_of_checkin__c = usersWrapper.checkinDate;
             
             insert newContact;
-
-            usersWrapper.SuccessMessage = 'You have successfully checked in';
         }
-       
+
+        return JSON.serialize(errSuccsessWrapper);
+
     }
 }

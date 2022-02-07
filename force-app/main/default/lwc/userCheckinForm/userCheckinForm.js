@@ -1,29 +1,66 @@
 import { LightningElement } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import saveForm from '@salesforce/apex/UserCheckinController.saveForm';
 
-import CONTACT_OBJECT from '@salesforce/schema/Contact';
-import FIRS_NAME_FIELD from '@salesforce/schema/Contact.FirstName';
-import LAST_NAME_FIELD from '@salesforce/schema/Contact.LastName';
-import CHECKIN_DATE_FIELD from '@salesforce/schema/Contact.Date_of_checkin__c';
 export default class UserCheckinForm extends LightningElement {
+    // declare variables
+    firstName;
+    lastName;
+    checkinDate;
 
-    // fields to be displayed 
-    objectApiName = CONTACT_OBJECT;
-    fields = [FIRS_NAME_FIELD, LAST_NAME_FIELD, CHECKIN_DATE_FIELD];
+
+    // initialising input
+    setFirstName(event) {
+        this.firstName = event.target.value;
+    }
+
+    setLastName(event) {
+        this.lastName = event.target.value;
+    }
+
+    setCheckinDate(event) {
+        this.checkinDate = event.target.value;
+    }
 
     // on success , we will send a toast message and pass a custom event to the parent
-    handleSuccess(event) {
+    handleSubmit(event) {
+        saveForm({firstName: this.firstName, lastName:this.lastName, checkinDate: this.checkinDate})
+        .then(result =>{
 
-        const updateUsersListEvent = new CustomEvent('somethingelse');
-        this.dispatchEvent(updateUsersListEvent);
+            console.log(result)
 
-        // show success message on form submission
-        const toastEvent = new ShowToastEvent({
-            title: "User has successfully checked in",
-            message: "You can find your name in the list of checked-in users",
-            variant: "success"
-        });
-        this.dispatchEvent(toastEvent);
+            const resultinJSON = JSON.parse(result); 
+
+            let title = '';
+
+            if (resultinJSON.firstnameError) {
+                title = resultinJSON.firstnameError;
+            }
+
+        //     private String firstnameError;
+        // private String lastNameError;
+        // private String dateError;
+        // private String successMessage;
+
+            const updateUsersListEvent = new CustomEvent('somethingelse');
+            this.dispatchEvent(updateUsersListEvent);
+    
+            // show success or error message on form submission
+            const toastEvent = new ShowToastEvent({
+                title: title,
+                message: "You can find your name in the list of checked-in users",
+                variant: "success"
+            }); 
+            
+            this.dispatchEvent(toastEvent);
+        })
+        .catch(error =>{
+            console.log(error);
+            alert(error);
+        })
+
+
+       
 
     }
     
