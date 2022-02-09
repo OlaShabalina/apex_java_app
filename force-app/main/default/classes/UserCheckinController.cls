@@ -1,6 +1,8 @@
+
 public with sharing class UserCheckinController {
     
-    // wrapper class with @AuraEnabled and {get;set;} properties 
+    // wrapper classes for passing parameters and error/success messages
+
     private class CheckedInUserVariablesWrapper {
 
         // declaring values from the input
@@ -10,8 +12,7 @@ public with sharing class UserCheckinController {
 
     }
 
-    
-    private class errorSuccessMessagesWrapper {
+    private class ErrorSuccessMessagesWrapper {
 
         // declaring error and success messages
         private String firstnameError;
@@ -24,7 +25,7 @@ public with sharing class UserCheckinController {
     public static String saveForm(String firstName, String lastName, Date checkinDate) {
 
         CheckedInUserVariablesWrapper usersWrapper = new CheckedInUserVariablesWrapper();
-        errorSuccessMessagesWrapper errSuccsessWrapper = new errorSuccessMessagesWrapper();
+        ErrorSuccessMessagesWrapper errSuccsessWrapper = new ErrorSuccessMessagesWrapper();
 
         // default value for the wrapper to show success message if there are no errors
         errSuccsessWrapper.SuccessMessage = 'You have successfully checked in';

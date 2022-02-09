@@ -1,10 +1,13 @@
-<apex:page controller="UserCheckinController" docType="html-5.0">
+<apex:page controller="UserCheckinControllerVFVersion" docType="html-5.0">
 
 <!-- css styles for the page  -->
 <apex:stylesheet value="{! $Resource.CustomCSS }" /> 
 
 <!-- header -->
-<apex:image styleClass="covid_app_logo" value="{! $Resource.CovidAppLogo }" />
+<apex:image 
+  style="margin-left: 10px; margin-top: 10px;" 
+  styleClass="covid_app_logo" 
+  value="{! $Resource.CovidAppLogo }" />
 <h1>Covid19 registration app</h1>
 
      
@@ -35,8 +38,9 @@
 </apex:form>
 
   <!-- link to the check-in VF page -->
-  <p>To see the list of all checked-in users please use the following link:</p>
+  <p style="margin-left: 10px;">To see the list of all checked-in users please use the following link:</p>
   <apex:outputLink 
+    style="margin-left: 10px;"
     value="https://resourceful-hawk-2mn035-dev-ed--c.visualforce.com/apex/ListOfCheckedInUsers" 
     id="theLink"
   >

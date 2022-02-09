@@ -4,7 +4,10 @@
   <apex:stylesheet value="{!$Resource.CustomCSS}" />
 
   <!-- header -->
-  <apex:image styleClass="covid_app_logo" value="{!$Resource.CovidAppLogo}" />
+  <apex:image 
+    style="margin-left: 10px; margin-top: 10px;" 
+    styleClass="covid_app_logo" 
+    value="{!$Resource.CovidAppLogo}" />
   <h1>Covid19 registration app</h1>
   
   <apex:form>
@@ -23,8 +26,11 @@
   </apex:form>
 
   <!-- link to the check-in VF page -->
-  <p>You can check-in below using the following link:</p>
-  <apex:outputLink value="https://resourceful-hawk-2mn035-dev-ed--c.visualforce.com/apex/UserCheckinPage" id="theLink">
+  <p style="margin-left: 10px;">You can check-in below using the following link:</p>
+  <apex:outputLink 
+    style="margin-left: 10px;" 
+    value="https://resourceful-hawk-2mn035-dev-ed--c.visualforce.com/apex/UserCheckinPage" 
+    id="theLink">
     Check-in Form
   </apex:outputLink>  
 </apex:page>
